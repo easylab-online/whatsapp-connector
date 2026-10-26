@@ -1,0 +1,18 @@
+{
+  "name": "easylab-whatsapp-connector",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=24.0.0"
+  },
+  "scripts": {
+    "start": "node --env-file=.env src/main.js",
+    "test": "node --test",
+    "check": "node --check src/main.js && node --check src/service.js"
+  },
+  "dependencies": {
+    "@whiskeysockets/baileys": "7.0.0-rc14",
+    "pino": "9.6.0"
+  }
+}

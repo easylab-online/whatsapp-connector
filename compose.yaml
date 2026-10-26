@@ -1,0 +1,22 @@
+services:
+  whatsapp:
+    build: .
+    init: true
+    restart: unless-stopped
+    env_file: .env
+    environment:
+      HOST: 0.0.0.0
+    ports:
+      - "127.0.0.1:3080:3080"
+    volumes:
+      - connector-data:/app/data
+    cap_drop: [ALL]
+    security_opt: [no-new-privileges:true]
+    stop_grace_period: 40s
+    healthcheck:
+      test: [CMD, node, -e, "fetch('http://127.0.0.1:3080/health.json').then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+volumes:
+  connector-data:
